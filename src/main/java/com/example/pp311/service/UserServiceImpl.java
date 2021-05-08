@@ -33,10 +33,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
+    @Transactional
     @Override
-    public void save(User user) {
-        userRepository.save(user);
-    }
+    public void save(User user) { userRepository.save(user); }
 
     @Override
     @Transactional
