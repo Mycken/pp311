@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+
+<div th:switch="${users}">
+  <h2 th:case="null">No users found</h2>
+  <div>
+    <h2>List of Users</h2>
+
+    <table border="1">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Username</th>
+<!--        <th>Password</th>-->
+        <th>isActive</th>
+        <th>Authorities</th>
+<!--        <th>Roles</th>-->
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr th:each="user : ${users}">
+          <td th:text="${user.id}"></td>
+          <td th:text="${user.firstName}"></td>
+          <td th:text="${user.lastName}"></td>
+          <td th:text="${user.email}"></td>
+          <td th:text="${user.username}"></td>
+<!--          <td th:text="${user.password}"></td>-->
+          <td th:text="${user.isActive}"></td>
+          <td th:text="${user.getAuthorities()}"></td>
+          <td> <a th:href="@{user-update/{id}(id=${user.id})}">Edit</a>
+           <a th:href="@{user-delete/{id}(id=${user.id})}">Delete</a></td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p><a th:href="@{user-create}">Create User</a> </p>
+</div>
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+  <input hidden type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

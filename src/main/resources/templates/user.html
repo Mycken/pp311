@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>salut!</h1>
+<p th:text="${user.id}">Id User</p>
+<p th:text="${user.firstName}">First Name</p>
+<p th:text="${user.lastName}">Last Name</p>
+<p th:text="${user.email}">Email</p>
+<p th:text="${user.username}">UserName</p>
+<table>
+    <tr th:each = "r: ${roles}">
+       <td th:text="${r}"></td>
+    </tr>
+</table>
+
+<br>
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

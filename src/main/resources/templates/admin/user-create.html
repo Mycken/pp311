@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create User</title>
+</head>
+<body>
+<form action="#" th:action="@{/admin/user-create}" th:object="${user}" method="post">
+    <label for="firstName">First name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
+    <br/>
+    <label for="lastName">Last name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    <br/>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="Email">
+    <br/>
+    <label for="username">UserName</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="UserName">
+    <br/>
+    <label for="password">Password</label>
+    <input type="text" th:field="*{password}" id="password" placeholder="Email">
+    <br>
+    <label>Role:
+        <select multiple size="2" name="select_role" class="form-control" id="exampleFormControlSelect3">
+            <option th:each="role : ${allRoles}" th:value="${role.getRole()}"
+                    th:text="${role.getRole() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"></option>
+        </select>
+    </label>
+<!--    <select id="roles" name="rolesNew"  required-->
+<!--            class="form-control form-control-sm" >-->
+<!--        <option th:each="r: ${allRoles}"-->
+<!--                th:value="${r}" th:utext="${r}">-->
+<!--        </option>-->
+<!--    </select>-->
+    <br/>
+    <input type="submit" value="Create User">
+
+</form>
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

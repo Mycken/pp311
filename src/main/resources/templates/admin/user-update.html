@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update User</title>
+</head>
+
+<body>
+<form action="#" th:action="@{/admin/user-update}" th:object="${user}" method="post">
+    <label for="id">ID</label>
+    <input readonly type="number" th:field="*{id}" id="id" placeholder="ID">
+    <br/>
+    <label for="firstName">First Name</label>
+    <input type="text" th:field="*{firstName}" id="firstName" placeholder="First Name">
+    <br/>
+    <label for="lastName">Last Name</label>
+    <input type="text" th:field="*{lastName}" id="lastName" placeholder="Last name">
+    <br/>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email" placeholder="Email">
+    <br/>
+    <label for="username">UserName</label>
+    <input type="text" th:field="*{username}" id="username" placeholder="UserName">
+    <br/>
+    <label for="password">Password</label>
+    <input readonly type="text" th:field="*{password}" id="password">
+    <br>
+    <br>
+    <p>Existing user's role:</p>
+    <p th:text="${user.getAuthorities()}"></p>
+
+    <label>Updated Role:
+        <select multiple size="2" name="select_roles" class="form-control" id="exampleFormControlSelect3">
+            <option th:each="role : ${allRoles}" th:value="${role.getRole()}"
+                    th:text="${role.getRole() == 'ROLE_ADMIN'} ? 'ROLE_ADMIN' : 'ROLE_USER'"></option>
+        </select>
+        <br/>
+    </label>
+
+    <br>
+
+    <br>
+
+    <input type="submit" value="Update User">
+    <br/>
+</form>
+
+<a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+
+<form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+    <input hidden type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>
